@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ChatByInterest</string>
+    <string name="title_groups">Список сообществ</string>
 </resources>
