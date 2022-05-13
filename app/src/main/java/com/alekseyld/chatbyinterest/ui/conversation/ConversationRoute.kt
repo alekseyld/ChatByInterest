@@ -73,6 +73,12 @@ fun ConversationContent(
                     .fillMaxSize()
                     .nestedScroll(scrollBehavior.nestedScrollConnection)
             ) {
+                Messages(
+                    messages = uiState.messages,
+                    navigateToProfile = navigateToProfile,
+                    modifier = Modifier.weight(1f),
+                    scrollState = scrollState
+                )
                 UserInput(
                     onMessageSent = { content ->
                         onAddMessage(
