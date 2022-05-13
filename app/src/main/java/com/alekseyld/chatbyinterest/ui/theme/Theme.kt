@@ -29,6 +29,7 @@ private val LightColorPalette = lightColors(
 
 @Composable
 fun ChatByInterestTheme(
+    isDarkTheme: Boolean = isSystemInDarkTheme(),
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable() () -> Unit
 ) {
