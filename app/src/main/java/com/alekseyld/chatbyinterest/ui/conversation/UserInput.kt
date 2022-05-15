@@ -1,5 +1,8 @@
 package com.alekseyld.chatbyinterest.ui.conversation
 
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.MutableTransitionState
@@ -232,6 +235,12 @@ private fun UserInputSelector(
     currentInputSelector: InputSelector,
     modifier: Modifier = Modifier
 ) {
+    val launcher = rememberLauncherForActivityResult(
+        contract =
+        ActivityResultContracts.GetContent()
+    ) { uri: Uri? ->
+    }
+
     Row(
         modifier = modifier
             .height(72.dp)
@@ -252,7 +261,10 @@ private fun UserInputSelector(
 //            description = stringResource(id = R.string.dm_desc)
 //        )
         InputSelectorButton(
-            onClick = { onSelectorChange(InputSelector.PICTURE) },
+            onClick = {
+                launcher.launch("image/*")
+                onSelectorChange(InputSelector.PICTURE)
+            },
             icon = Icons.Outlined.AddCircle,
             selected = currentInputSelector == InputSelector.PICTURE,
             description = stringResource(id = R.string.attach_photo_desc)

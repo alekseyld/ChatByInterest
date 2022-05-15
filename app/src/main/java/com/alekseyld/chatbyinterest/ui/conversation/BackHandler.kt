@@ -54,4 +54,7 @@ fun BackPressHandler(onBackPressed: () -> Unit) {
  * and setting up the callbacks with [BackPressHandler].
  */
 val LocalBackPressedDispatcher =
-    staticCompositionLocalOf<OnBackPressedDispatcher> { error("No Back Dispatcher provided") }
+    staticCompositionLocalOf<OnBackPressedDispatcher> {
+        OnBackPressedDispatcher()
+//        error("No Back Dispatcher provided")
+    }
