@@ -182,11 +182,11 @@ fun Messages(
                 // Hardcode day dividers for simplicity
                 if (index == messages.size - 1) {
                     item {
-                        DayHeader("20 Aug")
+                        DayHeader("15 мая")
                     }
                 } else if (index == 2) {
                     item {
-                        DayHeader("Today")
+                        DayHeader("Сегодня")
                     }
                 }
 
@@ -349,14 +349,16 @@ fun ChatItemBubble(
 
         message.imageContentUrl?.let {
             Spacer(modifier = Modifier.height(4.dp))
-            Surface(
-                color = backgroundBubbleColor,
-                shape = ChatBubbleShape
+            Box(
+                contentAlignment = Alignment.CenterStart
             ) {
                 Image(
-                    painter = painterResource(R.drawable.sticker), //TODO: обработка Image
+                    painter = painterResource(R.drawable.stellaris), //TODO: обработка Image
                     contentScale = ContentScale.Fit,
-                    modifier = Modifier.size(160.dp),
+                    modifier = Modifier.size(
+                        width = 300.dp,
+                        height = 160.dp
+                    ),
                     contentDescription = stringResource(id = R.string.attached_image)
                 )
             }

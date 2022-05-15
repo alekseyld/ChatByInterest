@@ -4,17 +4,17 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="members">%d members</string>
+    <string name="members">%d участников</string>
     <string name="search">Search</string>
     <string name="info">Information</string>
 
     <string name="author_me">me</string>
     <string name="now">8:30 PM</string>
 
-    <string name="textfield_hint">Message #composers</string>
-    <string name="jumpBottom">Jump to bottom</string>
+    <string name="textfield_hint">Отправить в #composers</string>
+    <string name="jumpBottom">В конец</string>
 
-    <string name="send">Send</string>
+    <string name="send">Отправить</string>
 
     <string name="attached_image">Attached image</string>
 
