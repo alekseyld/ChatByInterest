@@ -9,6 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.alekseyld.chatbyinterest.ui.conversation.ConversationRoute
 import com.alekseyld.chatbyinterest.ui.home.HomeRoute
 import com.alekseyld.chatbyinterest.ui.home.HomeViewModel
 
@@ -26,6 +27,9 @@ fun ChatNavGraph(
     ) {
         composable(ChatDestinations.HOME_ROUTE) {
             HomeRoute()
+        }
+        composable(ChatDestinations.CONVERSATION_ROUTE) {
+            ConversationRoute()
         }
     }
 }

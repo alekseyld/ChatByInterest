@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.alekseyld.chatbyinterest.R
 
 @Composable
@@ -36,11 +37,17 @@ fun ShortGroupCard(
             )
         }
 
+        Spacer(modifier = Modifier.height(5.dp))
+
         Box(
-            modifier = Modifier.width(64.dp)
+            modifier = Modifier
+                .width(64.dp)
                 .wrapContentSize(Alignment.Center)
         ) {
-            Text(title)
+            Text(
+                title,
+                fontSize = 15.sp,
+            )
         }
     }
 }

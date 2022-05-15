@@ -75,16 +75,16 @@ fun HomeContent() {
                         title = "Игры"
                     )
                     ShortGroupCard(
-                        resId = R.drawable.ic_game,
-                        title = "Игры"
+                        resId = R.drawable.ic_sport,
+                        title = "Спорт"
                     )
                     ShortGroupCard(
-                        resId = R.drawable.ic_game,
-                        title = "Игры"
+                        resId = R.drawable.ic_cooking,
+                        title = "Кухня"
                     )
                     ShortGroupCard(
-                        resId = R.drawable.ic_game,
-                        title = "Игры"
+                        resId = R.drawable.ic_fishing,
+                        title = "Рыбалка"
                     )
                 }
 
@@ -101,6 +101,7 @@ fun HomeContent() {
                     count = 10,
                     maxCount = 20,
                 )
+                Spacer(modifier = Modifier.height(30.dp))
             }
         },
         scaffoldState = scaffoldState,
