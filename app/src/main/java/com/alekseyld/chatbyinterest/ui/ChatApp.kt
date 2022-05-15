@@ -1,13 +1,17 @@
 package com.alekseyld.chatbyinterest.ui
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.alekseyld.chatbyinterest.ui.theme.ChatByInterestTheme
 
+@ExperimentalFoundationApi
+@ExperimentalMaterial3Api
 @ExperimentalMaterialApi
 @Composable
 fun ChatApp() {
@@ -28,6 +32,7 @@ fun ChatApp() {
 
         ChatNavGraph(
             navController = navController,
+            navigationActions = navigationActions,
         )
     }
 }

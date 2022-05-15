@@ -83,12 +83,16 @@ enum class EmojiStickerSelector {
 @Preview
 @Composable
 fun UserInputPreview() {
-    UserInput(onMessageSent = {})
+    UserInput(
+        onMessageSent = {},
+        textFieldHint = "#compose"
+    )
 }
 
 @ExperimentalFoundationApi
 @Composable
 fun UserInput(
+    textFieldHint: String,
     onMessageSent: (String) -> Unit,
     modifier: Modifier = Modifier,
     resetScroll: () -> Unit = {},
@@ -109,6 +113,7 @@ fun UserInput(
     Surface(tonalElevation = 2.dp) {
         Column(modifier = modifier) {
             UserInputText(
+                textFieldHint = textFieldHint,
                 textFieldValue = textState,
                 onTextChanged = { textState = it },
                 // Only show the keyboard if there's no input selector and text field has focus
@@ -183,7 +188,9 @@ private fun SelectorExpanded(
             InputSelector.PICTURE -> FunctionalityNotAvailablePanel()
             InputSelector.MAP -> FunctionalityNotAvailablePanel()
             InputSelector.PHONE -> FunctionalityNotAvailablePanel()
-            else -> { throw NotImplementedError() }
+            else -> {
+                throw NotImplementedError()
+            }
         }
     }
 }
@@ -341,6 +348,7 @@ var SemanticsPropertyReceiver.keyboardShownProperty by KeyboardShownKey
 @ExperimentalFoundationApi
 @Composable
 private fun UserInputText(
+    textFieldHint: String,
     keyboardType: KeyboardType = KeyboardType.Text,
     onTextChanged: (TextFieldValue) -> Unit,
     textFieldValue: TextFieldValue,
@@ -396,7 +404,7 @@ private fun UserInputText(
                         modifier = Modifier
                             .align(Alignment.CenterStart)
                             .padding(start = 32.dp),
-                        text = stringResource(id = R.string.textfield_hint),
+                        text = "Message #$textFieldHint",
                         style = MaterialTheme.typography.bodyLarge.copy(color = disableContentColor)
                     )
                 }

@@ -40,12 +40,47 @@ import com.alekseyld.chatbyinterest.ui.fake.FakeData
 import com.alekseyld.domain.model.Message
 import kotlinx.coroutines.launch
 
+@ExperimentalFoundationApi
+@ExperimentalMaterial3Api
+@ExperimentalMaterialApi
 @Composable
 fun ConversationRoute(
     conversationViewModel: ConversationViewModel = viewModel(),
+    conversationId: String
 ) {
+    val uiState by conversationViewModel.uiState.collectAsState()
 
+    ConversationRoute(
+        uiState = uiState,
+        conversationId
+    )
+}
 
+@ExperimentalFoundationApi
+@ExperimentalMaterial3Api
+@ExperimentalMaterialApi
+@Composable
+fun ConversationRoute(
+    uiState: ConversationUiState,
+    conversationId: String
+) {
+    when (uiState) {
+        is ConversationUiState.Conversions -> {
+            ConversationContent(
+                uiState = uiState,
+                conversationId = conversationId,
+                navigateToProfile = {},
+            )
+        }
+        ConversationUiState.Loading -> {
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier.fillMaxSize()
+            ) {
+                CircularProgressIndicator()
+            }
+        }
+    }
 }
 
 @ExperimentalFoundationApi
@@ -54,6 +89,7 @@ fun ConversationRoute(
 @Composable
 fun ConversationContent(
     uiState: ConversationUiState.Conversions,
+    conversationId: String,
     navigateToProfile: (String) -> Unit,
     modifier: Modifier = Modifier,
     onNavIconPressed: () -> Unit = { },
@@ -95,6 +131,7 @@ fun ConversationContent(
                     modifier = Modifier
                         .navigationBarsPadding()
                         .imePadding(),
+                    textFieldHint = conversationId,
                 )
             }
             // Channel name bar floats above the messages
@@ -219,7 +256,7 @@ fun Message(
                     .border(3.dp, MaterialTheme.colorScheme.surface, CircleShape)
                     .clip(CircleShape)
                     .align(Alignment.Top),
-                painter = painterResource(id = R.drawable.me), //TODO: Profile image
+                painter = painterResource(id = R.drawable.avatar), //TODO: Profile image
                 contentScale = ContentScale.Crop,
                 contentDescription = null,
             )
@@ -460,7 +497,8 @@ fun ConversationPreview() {
                 channelName = "#composers",
                 channelMembers = 42
             ),
-            navigateToProfile = { }
+            navigateToProfile = { },
+            conversationId = "composers",
         )
     }
 }

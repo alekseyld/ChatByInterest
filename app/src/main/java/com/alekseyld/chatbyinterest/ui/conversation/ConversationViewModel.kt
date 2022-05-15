@@ -1,14 +1,15 @@
 package com.alekseyld.chatbyinterest.ui.conversation
 
 import androidx.compose.runtime.mutableStateListOf
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.alekseyld.chatbyinterest.ui.ChatDestinations
+import com.alekseyld.chatbyinterest.ui.fake.FakeData
 import com.alekseyld.domain.model.Message
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 sealed interface ConversationUiState {
@@ -45,9 +46,10 @@ private data class ConversationViewModelState(
 
 }
 
-
 @HiltViewModel
-class ConversationViewModel @Inject constructor() : ViewModel() {
+class ConversationViewModel @Inject constructor(
+    savedStateHandle: SavedStateHandle,
+) : ViewModel() {
 
     private val viewModelState = MutableStateFlow(ConversationViewModelState(isLoading = true))
 
@@ -59,5 +61,27 @@ class ConversationViewModel @Inject constructor() : ViewModel() {
             viewModelState.value.toUiState()
         )
 
-}
+    init {
 
+        val conversationId =
+            savedStateHandle.get<String>(ChatDestinations.CONVERSATION_ROUTE_ARG).orEmpty()
+
+        loadConversation(conversationId)
+    }
+
+    private fun loadConversation(conversationId: String) {
+        viewModelScope.launch {
+
+            viewModelState.update {
+                it.copy(
+                    channelName = "Игры $conversationId",
+                    channelMembers = 10,
+                    isLoading = false,
+                    messages = FakeData.initialMessages,
+                )
+            }
+
+        }
+    }
+
+}

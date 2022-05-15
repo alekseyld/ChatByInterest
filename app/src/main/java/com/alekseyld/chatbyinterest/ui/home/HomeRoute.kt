@@ -30,13 +30,18 @@ import com.alekseyld.chatbyinterest.R
 @Composable
 fun HomeRoute(
     homeViewModel: HomeViewModel = viewModel(),
+    navigateToConversation: (conversationId: String) -> Unit
 ) {
-    HomeContent()
+    HomeContent(
+        navigateToConversation = navigateToConversation
+    )
 }
 
 @ExperimentalMaterialApi
 @Composable
-fun HomeContent() {
+fun HomeContent(
+    navigateToConversation: (conversationId: String) -> Unit
+) {
 
     val scope = rememberCoroutineScope()
     val scaffoldState = rememberBottomSheetScaffoldState()
@@ -73,19 +78,19 @@ fun HomeContent() {
                     ShortGroupCard(
                         resId = R.drawable.ic_game,
                         title = "Игры"
-                    )
+                    ) { navigateToConversation("games") }
                     ShortGroupCard(
                         resId = R.drawable.ic_sport,
                         title = "Спорт"
-                    )
+                    ){ navigateToConversation("sport") }
                     ShortGroupCard(
                         resId = R.drawable.ic_cooking,
                         title = "Кухня"
-                    )
+                    ) { navigateToConversation("cooking") }
                     ShortGroupCard(
                         resId = R.drawable.ic_fishing,
                         title = "Рыбалка"
-                    )
+                    ) { navigateToConversation("fishing") }
                 }
 
                 Spacer(modifier = Modifier.height(40.dp))
@@ -120,5 +125,7 @@ fun HomeContent() {
 @Preview
 @Composable
 private fun PreviewHomeContent() {
-    HomeContent()
+    HomeContent(
+        navigateToConversation = {}
+    )
 }

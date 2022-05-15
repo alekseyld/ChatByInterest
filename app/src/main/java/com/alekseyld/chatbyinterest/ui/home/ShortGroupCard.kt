@@ -2,6 +2,7 @@ package com.alekseyld.chatbyinterest.ui.home
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -22,8 +23,11 @@ import com.alekseyld.chatbyinterest.R
 fun ShortGroupCard(
     @DrawableRes resId: Int,
     title: String,
+    onClick: () -> Unit,
 ) {
-    Column {
+    Column(
+        Modifier.clickable(onClick = onClick)
+    ) {
 
         Card(
             backgroundColor = Color.White,
